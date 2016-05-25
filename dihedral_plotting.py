@@ -28,11 +28,16 @@ my_cmap = plt.cm.get_cmap('jet')
 my_cmap.set_under('w')
 
 for i in range(nRes):
-	counts, xedges, yedges, image = plt.hist2d(phi_data[:,i], psi_data[:,i], bins=100, cmap=my_cmap)
+	counts, xedges, yedges, image = plt.hist2d(phi_data[:], psi_data[:], bins=100, cmap=my_cmap,vmin = 0.1)
 	cb1 = plt.colorbar()
 	cb1.set_label('Frequency')
 	plt.xlabel('Phi Dihedral')
 	plt.ylabel('Psi Dihedral')
+	plt.xlim((-180,180))
+	plt.ylim((-180,180))
+	plt.xticks(np.arange(-180,181,90))
+	plt.yticks(np.arange(-180,181,90))
+	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
 	plt.savefig('%03d.%s.rama_plot.png' %(res_list.res[i],system))
 	plt.close()
 	counts = []
