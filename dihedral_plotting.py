@@ -28,6 +28,7 @@ my_cmap = plt.cm.get_cmap('jet')
 my_cmap.set_under('w')
 
 for i in range(nRes):
+# IF ONLY ONE RESIDUE IN RES_LIST FILE
 	counts, xedges, yedges, image = plt.hist2d(phi_data[:], psi_data[:], bins=100, cmap=my_cmap,vmin = 0.1)
 # IF MULTIPLE RESIDUES IN RES_LIST FILE
 #	counts, xedges, yedges, image = plt.hist2d(phi_data[:,i], psi_data[:,i], bins=100, cmap=my_cmap,vmin = 0.1)
