@@ -14,7 +14,7 @@ from MDAnalysis.analysis.align import *
 import res_list
 from distance_functions import *
 
-ref_frame = sys.argv[1]
+ref_pdb = sys.argv[1]
 pdb = sys.argv[2]
 traj_loc = sys.argv[3]
 start = int(sys.argv[4])
@@ -63,8 +63,8 @@ for i in range(nRes):
 	u_sel[i].append(u_all.residues[res_num].psi_selection())
 
 # OPEN OUTPUT FILES
-out1 = open('phi_dihedral.dat')
-out2 = open('psi_dihedral.dat')
+out1 = open('phi_dihedral.dat','w')
+out2 = open('psi_dihedral.dat','w')
 
 nSteps = 0
 
