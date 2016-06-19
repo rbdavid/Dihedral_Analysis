@@ -93,7 +93,7 @@ while start <= end:
 		# Collect and output dihedral values for each residue of interest
 		for i in range(nRes):
 			for j in range(nSel):
-				if u_sel[i][j] == 'None':
+				if u_sel[i][j] == None:
 					out_files[j].write('%10.6f   ' %(0))
 				else:
 					temp = u_sel[i][j].dihedral.value()
