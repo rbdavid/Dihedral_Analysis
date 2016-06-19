@@ -32,16 +32,16 @@ def ffprint(string):
 
 def summary(nSteps):
 	global system
-	sum_file = open('%s.analysis.summary' %(system),'w')
+	sum_file = open('%s.dihed.summary' %(system),'w')
 	sum_file.write('To recreate this analysis, run this line:\n')
 	for i in range(len(sys.argv)):
 		sum_file.write('%s ' %(sys.argv[i]))
-	sum_file.write('\n')
+	sum_file.write('\n\n')
 	sum_file.write('output files are written to:\n')
 	sum_file.write('	phi_dihedral.%s.dat\n' %(system))
 	sum_file.write('	psi_dihedral.%s.dat\n' %(system))
 	sum_file.write('	omega_dihedral.%s.dat\n' %(system))
-	sum_file.write('Number of Steps Analyzed: %d\n' %(nSteps))
+	sum_file.write('\nNumber of Steps Analyzed: %d\n' %(nSteps))
 	sum_file.close()
 
 # ----------------------------------------
