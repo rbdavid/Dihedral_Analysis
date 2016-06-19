@@ -44,10 +44,12 @@ for i in range(nRes):
 	u_sel[i] = []
 	u_sel[i].append(u_protein.residues[res_num].phi_selection())
 	u_sel[i].append(u_protein.residues[res_num].psi_selection())
+	u_sel[i].append(u_protein.residues[res_num].omega_selection())
 
 # OPEN OUTPUT FILES
-out1 = open('phi_dihedral.dat','w')
-out2 = open('psi_dihedral.dat','w')
+out1 = open('%s.phi_dihedral.dat' %(system),'w')
+out2 = open('%s.psi_dihedral.dat' %(system),'w')
+out3 = open('%s.omega_dihedral.dat' %(system),'w')
 
 nSteps = 0
 
@@ -62,19 +64,31 @@ while start <= end:
 	for ts in u.trajectory:
 		# Collect and output dihedral values for each residue of interest
 		for i in range(nRes):
-			phi = u_sel[i][0].dihedral.value()
-			psi = u_sel[i][1].dihedral.value()
+			if u_protein.residues[i].resname == 'GLY':
+				phi = u_sel[i][0].dihedral.value()
+				psi = u_sel[i][1].dihedral.value()
 
-			out1.write('%10.6f   ' %(phi))
-			out2.write('%10.6f   ' %(psi))
+				out1.write('%10.6f   ' %(phi))
+				out2.write('%10.6f   ' %(psi))
+				out3.write('%10.6f   ' %(0))
+			else:
+				phi = u_sel[i][0].dihedral.value()
+				psi = u_sel[i][1].dihedral.value()
+				omega = u_sel[i][2].dihedral.value()
+
+				out1.write('%10.6f   ' %(phi))
+				out2.write('%10.6f   ' %(psi))
+				out3.write('%10.6f   ' %(omega))
 
 		out1.write('\n')
 		out2.write('\n')
+		out3.write('\n')
 
 	start += 1
 
 out1.close()
 out2.close()
+out3.close()
 
 print 'Analyzed %d steps' %(nSteps)
 
