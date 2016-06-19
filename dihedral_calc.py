@@ -30,6 +30,20 @@ def ffprint(string):
 	print '%s' %(string)
         flush()
 
+def summary(nSteps):
+	global system
+	sum_file = open('%s.analysis.summary' %(system))
+	sum_file.write('To recreate this analysis, run this line:\n')
+	for i in range(len(sys.argv)):
+		sum_file.write('%s ' %(sys.argv[i]))
+	sum_file.write('\n')
+	sum_file.write('output files are written to:\n')
+	sum_file.write('	phi_dihedral.%s.dat\n' %(system))
+	sum_file.write('	psi_dihedral.%s.dat\n' %(system))
+	sum_file.write('	omega_dihedral.%s.dat\n' %(system))
+	sum_file.write('Number of Steps Analyzed: %d\n' %(nSteps))
+	sum_file.close()
+
 # ----------------------------------------
 # MAIN PROGRAM:
 
@@ -47,9 +61,9 @@ for i in range(nRes):
 	u_sel[i].append(u_protein.residues[res_num].omega_selection())
 
 # OPEN OUTPUT FILES
-out1 = open('%s.phi_dihedral.dat' %(system),'w')
-out2 = open('%s.psi_dihedral.dat' %(system),'w')
-out3 = open('%s.omega_dihedral.dat' %(system),'w')
+out1 = open('phi_dihedral.%s.dat' %(system),'w')
+out2 = open('psi_dihedral.%s.dat' %(system),'w')
+out3 = open('omega_dihedral.%s.dat' %(system),'w')
 
 nSteps = 0
 
@@ -90,5 +104,5 @@ out1.close()
 out2.close()
 out3.close()
 
-print 'Analyzed %d steps' %(nSteps)
+summary(nSteps)
 
