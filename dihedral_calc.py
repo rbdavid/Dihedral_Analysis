@@ -41,6 +41,7 @@ def summary(nSteps):
 	sum_file.write('	phi_dihedral.%s.dat\n' %(system))
 	sum_file.write('	psi_dihedral.%s.dat\n' %(system))
 	sum_file.write('	omega_dihedral.%s.dat\n' %(system))
+	sum_file.write('	chi1_dihedral.%s.dat\n' %(system))
 	sum_file.write('\nNumber of Steps Analyzed: %d\n' %(nSteps))
 	sum_file.close()
 
@@ -59,11 +60,22 @@ for i in range(nRes):
 	u_sel[i].append(u_protein.residues[res_num].phi_selection())
 	u_sel[i].append(u_protein.residues[res_num].psi_selection())
 	u_sel[i].append(u_protein.residues[res_num].omega_selection())
+	u_sel[i].append(u_protein.residues[res_num].chi1_selection())
+
+nSel = len(u_sel[0])
 
 # OPEN OUTPUT FILES
 out1 = open('phi_dihedral.%s.dat' %(system),'w')
 out2 = open('psi_dihedral.%s.dat' %(system),'w')
 out3 = open('omega_dihedral.%s.dat' %(system),'w')
+out4 = open('chi1_dihedral.%s.dat' %(system),'w')
+
+# CREATE AN OUTPUT FILE LIST...
+out_files = []
+out_files.append(out1)
+out_files.append(out2)
+out_files.append(out3)
+out_files.append(out4)
 
 nSteps = 0
 
@@ -78,31 +90,24 @@ while start <= end:
 	for ts in u.trajectory:
 		# Collect and output dihedral values for each residue of interest
 		for i in range(nRes):
-			if u_protein.residues[i].resname == 'GLY':
-				phi = u_sel[i][0].dihedral.value()
-				psi = u_sel[i][1].dihedral.value()
-
-				out1.write('%10.6f   ' %(phi))
-				out2.write('%10.6f   ' %(psi))
-				out3.write('%10.6f   ' %(0))
-			else:
-				phi = u_sel[i][0].dihedral.value()
-				psi = u_sel[i][1].dihedral.value()
-				omega = u_sel[i][2].dihedral.value()
-
-				out1.write('%10.6f   ' %(phi))
-				out2.write('%10.6f   ' %(psi))
-				out3.write('%10.6f   ' %(omega))
+			for j in range(nSel):
+				if u_sel[i][j] == 'None':
+					out_files[j].write('%10.6f   ' %(0))
+				else:
+					temp = u_sel[i][j].dihedral.value()
+					out_files[j].write('%10.6f   ' %(temp))
 
 		out1.write('\n')
 		out2.write('\n')
 		out3.write('\n')
+		out4.write('\n')
 
 	start += 1
 
 out1.close()
 out2.close()
 out3.close()
+out4.close()
 
 summary(nSteps)
 
