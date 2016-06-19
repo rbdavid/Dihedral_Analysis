@@ -32,7 +32,7 @@ def ffprint(string):
 
 def summary(nSteps):
 	global system
-	sum_file = open('%s.analysis.summary' %(system))
+	sum_file = open('%s.analysis.summary' %(system),'w')
 	sum_file.write('To recreate this analysis, run this line:\n')
 	for i in range(len(sys.argv)):
 		sum_file.write('%s ' %(sys.argv[i]))
