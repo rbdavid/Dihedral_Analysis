@@ -18,13 +18,15 @@ nullfmt = NullFormatter()
 phi_file = sys.argv[1]
 psi_file = sys.argv[2]
 omega_file = sys.argv[3]
-system = sys.argv[4]
+chi1_file = sys.argv[4]
+system = sys.argv[5]
 
 nRes = len(res_list.res)
 
 phi_data = np.loadtxt(phi_file)
 psi_data = np.loadtxt(psi_file)
 omega_data = np.loadtxt(omega_file)
+chi1_data = np.loadtxt(chi1_file)
 
 my_cmap = plt.cm.get_cmap('jet')
 my_cmap.set_under('w')
@@ -60,5 +62,17 @@ for i in range(nRes):
 	plt.ylim((-180,180))
 	plt.yticks(np.arange(-180,181,90))
 	plt.savefig('%03d.%s.omega_dihedral.png' %(res_list.res[i],system))
+	plt.close()
+
+# IF ONLY ONE RESIDUE IN RES_LIST FILE
+#	plt.plot(chi1_data[:],'k.')
+# IF MULTIPLE RESIDUES IN RES_LIST FILE
+	plt.plot(chi1_data[:,i],'k.')
+	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
+	plt.xlabel(r'Time (timesteps)', size=12)
+	plt.ylabel(r'Chi1 Dihedral', size=12)
+	plt.ylim((-180,180))
+	plt.yticks(np.arange(-180,181,90))
+	plt.savefig('%03d.%s.chi1_dihedral.png' %(res_list.res[i],system))
 	plt.close()
 
