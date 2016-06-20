@@ -34,7 +34,7 @@ def summary(nSteps):
 	global system
 
 	sum_file = open('%s.dihedral.summary' %(system),'w')
-	sum_file.write('%s\n' %(MDAnalysis.version.__version__))
+	sum_file.write('Using MDAnalysis version: %s\n' %(MDAnalysis.version.__version__))
 	sum_file.write('To recreate this analysis, run this line:\n')
 	for i in range(len(sys.argv)):
 		sum_file.write('%s ' %(sys.argv[i]))
