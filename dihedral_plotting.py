@@ -55,6 +55,31 @@ for i in range(nRes):
 # IF ONLY ONE RESIDUE IN RES_LIST FILE
 #	plt.plot(omega_data[:],'k.')
 # IF MULTIPLE RESIDUES IN RES_LIST FILE
+	plt.plot(phi_data[:,i],'k.')
+	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
+	plt.xlabel(r'Time (timesteps)', size=12)
+	plt.ylabel(r'Phi Dihedral', size=12)
+	plt.ylim((-180,180))
+	plt.yticks(np.arange(-180,181,90))
+	plt.savefig('%03d.%s.phi_dihedral.png' %(res_list.res[i],system))
+	plt.close()
+
+# IF ONLY ONE RESIDUE IN RES_LIST FILE
+# IF ONLY ONE RESIDUE IN RES_LIST FILE
+#	plt.plot(omega_data[:],'k.')
+# IF MULTIPLE RESIDUES IN RES_LIST FILE
+	plt.plot(psi_data[:,i],'k.')
+	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
+	plt.xlabel(r'Time (timesteps)', size=12)
+	plt.ylabel(r'Psi Dihedral', size=12)
+	plt.ylim((-180,180))
+	plt.yticks(np.arange(-180,181,90))
+	plt.savefig('%03d.%s.psi_dihedral.png' %(res_list.res[i],system))
+	plt.close()
+
+# IF ONLY ONE RESIDUE IN RES_LIST FILE
+#	plt.plot(omega_data[:],'k.')
+# IF MULTIPLE RESIDUES IN RES_LIST FILE
 	plt.plot(omega_data[:,i],'k.')
 	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
 	plt.xlabel(r'Time (timesteps)', size=12)
