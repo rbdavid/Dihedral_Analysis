@@ -45,6 +45,8 @@ def summary(nSteps):
 	sum_file.write('	omega_dihedral.%s.dat\n' %(system))
 	sum_file.write('	chi1_dihedral.%s.dat\n' %(system))
 	sum_file.write('\nNumber of Steps Analyzed: %d\n' %(nSteps))
+	sum_file.write('Residue numbers being analyzed:\n')
+	sum_file.write(res_list.res)
 	sum_file.close()
 
 # ----------------------------------------
