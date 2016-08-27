@@ -1,0 +1,4 @@
+
+# TO DO FILE:
+# -- create some function to prepare atom selections for a non-MDAnalysis dihedral selection; allow the user to read in a dihedral; optimally, this dihedral would not be restricted to a single residue; this might be useful for visualizing dihedral angles that are possible collective variables for enhanced sampling methods;
+
